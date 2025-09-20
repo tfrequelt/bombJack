@@ -23,6 +23,9 @@
     <ClCompile Include="template\scene.cpp">
       <Filter>template</Filter>
     </ClCompile>
+    <ClCompile Include="BombJack.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Platform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -53,6 +56,9 @@
     <ClInclude Include="template\scene.h">
       <Filter>template</Filter>
     </ClInclude>
+    <ClInclude Include="BombJack.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="Platform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">

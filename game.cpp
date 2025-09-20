@@ -4,18 +4,61 @@
 
 #include "precomp.h"
 #include "game.h"
+#include "BombJack.h"
+#include "Background.h"
+#include "Platform.h"
+
+using namespace Tmpl8;
+
+// Game objects
+BombJack* jack = nullptr;
+Background* background = nullptr;
+bool gameInitialized = false;
 
 // -----------------------------------------------------------
 // Initialize the application
 // -----------------------------------------------------------
 void Game::Init()
 {
-	// anything that happens only once at application start goes here
+    // Create game objects
+    background = new Background();
+    jack = new BombJack();
+
+    // Initialize objects
+    background->Init();
+    InitializePlatforms();
+    jack->Init();
+
+    gameInitialized = true;
 }
 
 // -----------------------------------------------------------
 // Main application tick function - Executed once per frame
 // -----------------------------------------------------------
-void Game::Tick( float /* deltaTime */ )
+void Game::Tick(float deltaTime)
 {
+    if (!gameInitialized) return;
+
+    // Clear screen
+    screen->Clear(0);
+
+    // Draw background (scaled from 224x224 to 896x896)
+    background->Draw(screen);
+
+    // Draw platforms
+    DrawAllPlatforms(screen);
+
+    // Update and draw Jack
+    jack->Update(deltaTime);
+    jack->Draw(screen);
+}
+
+// -----------------------------------------------------------
+// Shutdown - Clean up game objects
+// -----------------------------------------------------------
+void Game::Shutdown()
+{
+    delete jack;
+    delete background;
+    CleanupPlatforms();
 }
